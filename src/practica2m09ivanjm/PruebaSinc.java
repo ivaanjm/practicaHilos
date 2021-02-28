@@ -6,6 +6,8 @@
 package practica2m09ivanjm;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,35 +15,29 @@ import java.util.ArrayList;
  */
 public class PruebaSinc {
 
-    private boolean dado = false;
-    ArrayList<Integer> arrayList = new ArrayList(20);
+    private boolean dadounoencendido = false;
 
+    ArrayList<Integer> arrayList = new ArrayList(20);
 
     public synchronized void dadoUno(int numeroDado) {
         System.out.println("Numero dado 1: " + numeroDado);
-        dado = true;
+        dadounoencendido = false;
         notify();
-
     }
 
-    public synchronized void dadoDos(int numeroDado) {
+    public synchronized void dadoDos(int numeroDado)  {
 
-        while (dado == false) {
+        while (dadounoencendido == true) {
             try {
-
                 wait();
-
-            } catch (InterruptedException e) {
-                System.out.println("Error " + e.getMessage());
-            }
-
+            } catch (InterruptedException e){ System.out.println("Error " + e.getMessage());}
         }
-        dado = false;
         System.out.println("Numero dado 2: " + numeroDado);
         System.out.println(arrayList.toString());
         System.out.println("--------------------------------");
+        dadounoencendido = false;
+     
+
     }
-
-
 
 }
