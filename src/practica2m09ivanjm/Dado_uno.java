@@ -26,22 +26,15 @@ public class Dado_uno implements Runnable {
                 int numero = (int) (Math.random() * 6 + 1);
 
                 Thread.sleep(100);
-                if (numero % 2 != 0) {
-                    if (pS.arrayList.get(pS.arrayList.size() - 1)%2 != 0) {
-                        int aux = pS.arrayList.get(pS.arrayList.size() - 1);
-                        pS.arrayList.remove(pS.arrayList.size() - 1);
-                        aux+=numero;
-                        pS.arrayList.add(aux);
-                          pS.dadoUno(numero);
-                    } else {
-                        pS.arrayList.add(numero);
-                        pS.dadoUno(numero);
-                    }
+                if ((numero % 2 != 0) && (pS.arrayList.get(pS.arrayList.size() - 1) % 2 != 0)) {
+                    int aux = pS.arrayList.get(pS.arrayList.size() - 1) + numero;
+                    pS.arrayList.remove(pS.arrayList.size() - 1);
+                    pS.arrayList.add(aux);
+                    pS.dadoUno(numero);
                 } else {
                     pS.arrayList.add(numero);
                     pS.dadoUno(numero);
                 }
-
             }
         } catch (InterruptedException e) {
             System.out.println("Error " + e.getMessage());
