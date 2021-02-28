@@ -21,7 +21,9 @@ public class Practica2M09IvanJM {
     public static void main(String[] args) {
         PruebaSinc pS = new PruebaSinc();
         Dado_uno d1 = new Dado_uno(pS);
+        
         Dado_Dos d2 = new Dado_Dos(pS);
+ 
 
     }
 }

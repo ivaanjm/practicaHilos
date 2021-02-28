@@ -24,28 +24,35 @@ public class Dado_Dos implements Runnable {
 
     @Override
     public void run() {
-       
-        for (int i = 0; i < 10; i++) {
+
+        for (int i = 0; i < 300; i++) {
             try {
-                Thread.sleep(200);
-                int numero = (int) (Math.random() * 6 + 1);
-                if ((numero % 2 != 0) && (pS.arrayList.get(pS.arrayList.size() - 1) % 2 != 0)) {
-                    int aux = pS.arrayList.get(pS.arrayList.size() - 1) + numero;
-                    pS.arrayList.remove(pS.arrayList.size() - 1);
-                    pS.arrayList.add(aux);
-                    
-                    pS.dadoDos(numero);
-                    
-                } else {
-                    pS.arrayList.add(numero);
-                    
-                    pS.dadoDos(numero);
-                    
+                  Thread.sleep(1);
+                while (pS.arrayList.size() + 1 < 250) {
+                    Thread.sleep(100);
+                    int numero = (int) (Math.random() * 6 + 1);
+                    if ((numero % 2 != 0) && (pS.arrayList.get(pS.arrayList.size() - 1) % 2 != 0)) {
+                        int aux = pS.arrayList.get(pS.arrayList.size() - 1) + numero;
+                        pS.arrayList.remove(pS.arrayList.size() - 1);
+                        pS.arrayList.add(aux);
+                        pS.dadoDos(numero);
+
+                    } else {
+                        pS.arrayList.add(numero);
+                        pS.dadoDos(numero);
+                    }
+
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Dado_Dos.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+        }
+        try {
+            this.finalize();
+            System.out.println("Los hilos morira porque está llena la array " + pS.arrayList.size());
+
+        } catch (Throwable ex) {
+            Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

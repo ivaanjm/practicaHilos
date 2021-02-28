@@ -24,7 +24,6 @@ public class Dado_uno implements Runnable {
 
     @Override
     public void run() {
-
         for (int i = 0; i < 300; i++) {     
                 while (pS.arrayList.size() + 1 < 250) {
                     try {
@@ -36,7 +35,6 @@ public class Dado_uno implements Runnable {
                         Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-          
         }
         try {
             this.finalize();

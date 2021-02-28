@@ -15,28 +15,38 @@ import java.util.logging.Logger;
  */
 public class PruebaSinc {
 
-    private boolean dadounoencendido = false;
+    private boolean dadounoencendido = true;
 
-    ArrayList<Integer> arrayList = new ArrayList(20);
-
+    ArrayList<Integer> arrayList = new ArrayList(250);
     public synchronized void dadoUno(int numeroDado) {
+       
+        while (!dadounoencendido) {
+            try {
+               wait();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PruebaSinc.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+     
         System.out.println("Numero dado 1: " + numeroDado);
         dadounoencendido = false;
-        notify();
+        notifyAll();
     }
 
-    public synchronized void dadoDos(int numeroDado)  {
+    public synchronized void dadoDos(int numeroDado) {
 
-        while (dadounoencendido == true) {
+        while (dadounoencendido) {
             try {
                 wait();
-            } catch (InterruptedException e){ System.out.println("Error " + e.getMessage());}
+            } catch (InterruptedException e) {
+                System.out.println("Error " + e.getMessage());
+            }
         }
         System.out.println("Numero dado 2: " + numeroDado);
         System.out.println(arrayList.toString());
         System.out.println("--------------------------------");
-        dadounoencendido = false;
-     
+        dadounoencendido = true;
+        notifyAll();
 
     }
 
