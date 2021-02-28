@@ -24,12 +24,28 @@ public class Dado_Dos implements Runnable {
 
     @Override
     public void run() {
-
+       
         for (int i = 0; i < 10; i++) {
-            int numero = (int) (Math.random() * 6 + 1);   
-            pS.arrayList.add(numero);
-            pS.dadoDos(numero);
+            try {
+                Thread.sleep(200);
+                int numero = (int) (Math.random() * 6 + 1);
+                if ((numero % 2 != 0) && (pS.arrayList.get(pS.arrayList.size() - 1) % 2 != 0)) {
+                    int aux = pS.arrayList.get(pS.arrayList.size() - 1) + numero;
+                    pS.arrayList.remove(pS.arrayList.size() - 1);
+                    pS.arrayList.add(aux);
+                    
+                    pS.dadoDos(numero);
+                    
+                } else {
+                    pS.arrayList.add(numero);
+                    
+                    pS.dadoDos(numero);
+                    
+                }
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Dado_Dos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
-
     }
 }

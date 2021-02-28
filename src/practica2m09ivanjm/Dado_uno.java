@@ -5,6 +5,9 @@
  */
 package practica2m09ivanjm;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author IvánJM
@@ -21,24 +24,17 @@ public class Dado_uno implements Runnable {
 
     @Override
     public void run() {
-        try {
-            for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
+            try {
+                Thread.sleep(195);
                 int numero = (int) (Math.random() * 6 + 1);
-
-                Thread.sleep(100);
-                if ((numero % 2 != 0) && (pS.arrayList.get(pS.arrayList.size() - 1) % 2 != 0)) {
-                    int aux = pS.arrayList.get(pS.arrayList.size() - 1) + numero;
-                    pS.arrayList.remove(pS.arrayList.size() - 1);
-                    pS.arrayList.add(aux);
-                    pS.dadoUno(numero);
-                } else {
-                    pS.arrayList.add(numero);
-                    pS.dadoUno(numero);
-                }
+                pS.arrayList.add(numero);
+                pS.dadoUno(numero);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (InterruptedException e) {
-            System.out.println("Error " + e.getMessage());
+           
         }
-    }
 
+    }
 }
