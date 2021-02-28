@@ -24,16 +24,24 @@ public class Dado_uno implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 10; i++) {
-            try {
-                Thread.sleep(195);
-                int numero = (int) (Math.random() * 6 + 1);
-                pS.arrayList.add(numero);
-                pS.dadoUno(numero);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           
+
+        for (int i = 0; i < 300; i++) {     
+                while (pS.arrayList.size() + 1 < 250) {
+                    try {
+                        Thread.sleep(100);
+                        int numero = (int) (Math.random() * 6 + 1);
+                        pS.arrayList.add(numero);
+                        pS.dadoUno(numero);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+          
+        }
+        try {
+            this.finalize();
+        } catch (Throwable ex) {
+            Logger.getLogger(Dado_uno.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
